@@ -24,6 +24,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
       body: taps[currentIndex],
 
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add, size: 28,),
+      ),
+
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) => setState(() {

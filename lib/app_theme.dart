@@ -30,7 +30,13 @@ class AppTheme {
       backgroundColor: Light.inputs,
       selectedItemColor: Light.mainColor,
       unselectedItemColor: Light.disable,
-    )
+    ),
+
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: Light.mainColor,
+      foregroundColor: Light.inputs,
+      shape: CircleBorder(),
+    ),
   );
 
   static ThemeData darkTheme = ThemeData(
