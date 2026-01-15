@@ -25,6 +25,12 @@ class Dark {
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: Light.background,
+
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Light.inputs,
+      selectedItemColor: Light.mainColor,
+      unselectedItemColor: Light.disable,
+    )
   );
 
   static ThemeData darkTheme = ThemeData(
