@@ -1,5 +1,6 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/onboarding.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
@@ -16,8 +17,9 @@ class Evently extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         HomeScreen.routeName: (_) => HomeScreen(),
+        Onboarding.routeName: (_) => Onboarding(),
       },
-      initialRoute: HomeScreen.routeName,
+      initialRoute: Onboarding.routeName,
 
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
