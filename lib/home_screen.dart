@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      body: taps[currentIndex],
+      body: SafeArea(child: taps[currentIndex]),
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {},

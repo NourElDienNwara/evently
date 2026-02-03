@@ -31,6 +31,26 @@ class AppTheme {
 
     scaffoldBackgroundColor: light.background,
 
+    inputDecorationTheme: InputDecorationThemeData(
+      filled: true,
+      fillColor: light.inputs,
+      hintStyle: TextStyle(
+        color: light.secText,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+      ),
+
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: light.stoke),
+        borderRadius: BorderRadius.circular(16),
+      ),
+
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: light.stoke),
+        borderRadius: BorderRadius.circular(16),
+      ),
+    ),
+
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: light.inputs,
       selectedItemColor: light.mainColor,
