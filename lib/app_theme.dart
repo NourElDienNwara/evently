@@ -25,7 +25,7 @@ class Dark {
 class AppTheme {
   static Light light = Light();
   static Dark dark = Dark();
-  
+
   static ThemeData lightTheme = ThemeData(
     primaryColor: light.mainColor,
 
@@ -48,6 +48,18 @@ class AppTheme {
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(color: light.stoke),
         borderRadius: BorderRadius.circular(16),
+      ),
+    ),
+
+    listTileTheme: ListTileThemeData(
+      tileColor: light.inputs,
+      minTileHeight: 0,
+      contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16),), 
+      titleTextStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: light.mainText,
       ),
     ),
 
