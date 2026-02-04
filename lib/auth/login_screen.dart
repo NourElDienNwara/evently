@@ -12,87 +12,94 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: .start,
-            children: [
-              Center(child: Image.asset('assets/images/evently.png', height: 27)),
-
-              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-
-              Text(
-                'Login to your account',
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-
-              SizedBox(height: 24),
-
-              DefaultTextFormField(
-                hintText: 'Enter Your Email',
-                prefixIcon: 'email',
-                controller: emailController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  return null;
-                },
-              ),
-
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-
-              DefaultTextFormField(
-                hintText: 'Enter Your Password',
-                prefixIcon: 'password',
-                isPassword: true,
-                controller: passwordController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  return null;
-                },
-              ),
-
-              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-
-              
-
-              SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-
-              DefaultElevatedBotton(label: 'Login', onPressed: login),
-
-              SizedBox(height: 24),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Don’t have an account ?', style: Theme.of(context).textTheme.titleSmall),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(RegisterScreen.routeName);
-                    },
-                    child: Text(
-                      'Register',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.w600,
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: .start,
+              children: [
+                Center(child: Image.asset('assets/images/evently.png', height: 27)),
+            
+                SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            
+                Text(
+                  'Login to your account',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+            
+                SizedBox(height: 24),
+            
+                DefaultTextFormField(
+                  hintText: 'Enter Your Email',
+                  prefixIcon: 'email',
+                  controller: emailController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your email';
+                    }
+                    return null;
+                  },
+                ),
+            
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+            
+                DefaultTextFormField(
+                  hintText: 'Enter Your Password',
+                  prefixIcon: 'password',
+                  isPassword: true,
+                  controller: passwordController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    }
+                    return null;
+                  },
+                ),
+            
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+            
+                
+            
+                SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+            
+                DefaultElevatedBotton(label: 'Login', onPressed: login),
+            
+                SizedBox(height: 24),
+            
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Don’t have an account ?', style: Theme.of(context).textTheme.titleSmall),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed(RegisterScreen.routeName);
+                      },
+                      child: Text(
+                        'Register',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -100,6 +107,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void login() {
-    Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+    if (formKey.currentState!.validate()) {
+      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+    }
   }
 }

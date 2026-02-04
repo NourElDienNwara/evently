@@ -49,6 +49,16 @@ class AppTheme {
         borderSide: BorderSide(color: light.stoke),
         borderRadius: BorderRadius.circular(16),
       ),
+
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: light.red),
+        borderRadius: BorderRadius.circular(16),
+      ),
+
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: light.red),
+        borderRadius: BorderRadius.circular(16),
+      ),
     ),
 
     listTileTheme: ListTileThemeData(
