@@ -1,6 +1,6 @@
 import 'package:evently/taps/favorite/favorite_tap.dart';
 import 'package:evently/taps/home/home_tap.dart';
-import 'package:evently/taps/profile/profile.dart';
+import 'package:evently/taps/profile/profile_tap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
