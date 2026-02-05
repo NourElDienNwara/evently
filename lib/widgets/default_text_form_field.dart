@@ -1,46 +1,73 @@
+import 'package:evently/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class DefaultTextFormField extends StatelessWidget {
+class DefaultTextFormField extends StatefulWidget {
   String hintText;
   String? prefixIcon;
   String? suffixIcon;
+
+  int maxLines;
 
   void Function(String)? onChanged;
   TextEditingController? controller;
   String? Function(String?)? validator;
 
-  DefaultTextFormField({
+  bool isPassword;
+
+  DefaultTextFormField({super.key, 
     required this.hintText,
     this.prefixIcon,
     this.suffixIcon,
+    this.maxLines = 1,
     this.onChanged,
     this.controller,
     this.validator,
+    this.isPassword = false,
   });
+
+  @override
+  State<DefaultTextFormField> createState() => _DefaultTextFormFieldState();
+}
+
+class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
+  late bool obscureText = widget.isPassword;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
-        hintText: hintText,
-        prefixIcon: prefixIcon != null
+        hintText: widget.hintText,
+        prefixIcon: widget.prefixIcon != null
             ? Padding(
-              padding: const EdgeInsets.all(16),
-              child: SvgPicture.asset('assets/icons/$prefixIcon.svg'),
-            )
+                padding: const EdgeInsets.all(16),
+                child: SvgPicture.asset('assets/icons/${widget.prefixIcon}.svg'),
+              )
             : null,
-        suffixIcon: suffixIcon != null
+        suffixIcon: widget.isPassword
+            ? IconButton(
+                onPressed: () {
+                  setState(() {
+                    obscureText = !obscureText;
+                  });
+                },
+                icon: Icon( obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined, color: AppTheme.light.disable,),
+              )
+            : widget.suffixIcon != null
             ? Padding(
-              padding: const EdgeInsets.all(16),
-              child: SvgPicture.asset('assets/icons/$suffixIcon.svg'),
-            )
+                padding: const EdgeInsets.all(16),
+                child: SvgPicture.asset('assets/icons/${widget.suffixIcon}.svg'),
+              )
             : null,
       ),
 
-      onChanged: onChanged,
-      controller: controller,
-      validator: validator,
+      onChanged: widget.onChanged,
+      controller: widget.controller,
+      validator: widget.validator,
+      obscureText: obscureText,
+      autovalidateMode: .onUserInteraction,
+      onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
+      maxLines: widget.maxLines,
     );
   }
 }
