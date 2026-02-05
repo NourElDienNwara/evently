@@ -20,5 +20,19 @@ class CategoryModel {
       icon: Icons.sports_basketball_outlined,
       imageName: 'sport',
     ),
+
+    CategoryModel(
+      id: '2',
+      name: 'Book Club',
+      icon: Icons.menu_book_outlined,
+      imageName: 'bookclub',
+    ),
+
+    CategoryModel(
+      id: '3',
+      name: 'Art',
+      icon: Icons.brush_outlined,
+      imageName: 'art',
+    ),
   ];
 }

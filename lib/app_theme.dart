@@ -31,6 +31,16 @@ class AppTheme {
 
     scaffoldBackgroundColor: light.background,
 
+    appBarTheme: AppBarTheme(
+      backgroundColor: light.background,
+      centerTitle: true,
+      titleTextStyle: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        color: light.mainText,
+      ),
+    ),
+
     inputDecorationTheme: InputDecorationThemeData(
       filled: true,
       fillColor: light.inputs,

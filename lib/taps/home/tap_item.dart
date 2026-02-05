@@ -7,7 +7,7 @@ class TapItem extends StatelessWidget {
   IconData icon;
   bool isSelected;
 
-  TapItem({required this.label, required this.icon, required this.isSelected});
+  TapItem({super.key, required this.label, required this.icon, required this.isSelected});
   @override
   Widget build(BuildContext context) {
     return Container(

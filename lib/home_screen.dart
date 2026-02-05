@@ -1,3 +1,4 @@
+import 'package:evently/create_event_screen.dart';
 import 'package:evently/taps/favorite/favorite_tap.dart';
 import 'package:evently/taps/home/home_tap.dart';
 import 'package:evently/taps/profile/profile_tap.dart';
@@ -6,6 +7,8 @@ import 'package:flutter_svg/svg.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = '/home';
+
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -25,7 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(child: taps[currentIndex]),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed(CreateEventScreen.routeName);
+        },
         child: Icon(Icons.add, size: 28,),
       ),
 
