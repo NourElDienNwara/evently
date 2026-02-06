@@ -4,6 +4,8 @@ import 'package:evently/home_screen.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:evently/widgets/default_elevated_botton.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
+import 'package:evently/widgets/ui_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -148,13 +150,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void register() {
     if (formKey.currentState!.validate()) {
       FirebaseServes.register(
-        userName: nameController.text,
-        email: emailController.text,
-        password: passwordController.text,
-      ).then((user) {
-        Provider.of<UserProvider>(context, listen: false).updateCurrentUser(user);
-        Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
-      });
+            userName: nameController.text,
+            email: emailController.text,
+            password: passwordController.text,
+          )
+          .then((user) {
+            Provider.of<UserProvider>(
+              context,
+              listen: false,
+            ).updateCurrentUser(user);
+            Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+            UiUtils.showSuccessMesssage('Login Success');
+          })
+          .catchError((error) {
+            if (error is FirebaseAuthException) {
+              UiUtils.showErrorMessage(error.message);
+            }
+          });
     }
   }
 }

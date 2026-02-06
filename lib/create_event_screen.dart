@@ -4,6 +4,7 @@ import 'package:evently/models/event_model.dart';
 import 'package:evently/taps/home/tap_item.dart';
 import 'package:evently/widgets/default_elevated_botton.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
+import 'package:evently/widgets/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -238,9 +239,12 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
         ),
         category: selectedCategory,
       );
-      FirebaseServes.createEvent(event).then((_) {
-        Navigator.of(context).pop();
-      });
+      FirebaseServes.createEvent(event)
+          .then((_) {
+            Navigator.of(context).pop();
+            UiUtils.showSuccessMesssage('Event Created Success');
+          })
+          .catchError((_) => UiUtils.showErrorMessage('Faild to create event'));
     }
   }
 }
