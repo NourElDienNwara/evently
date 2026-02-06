@@ -1,4 +1,6 @@
+import 'package:evently/firebase_serves.dart';
 import 'package:evently/models/category_model.dart';
+import 'package:evently/models/event_model.dart';
 import 'package:evently/taps/home/tap_item.dart';
 import 'package:evently/widgets/default_elevated_botton.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
@@ -15,7 +17,6 @@ class CreateEventScreen extends StatefulWidget {
 }
 
 class _CreateEventScreenState extends State<CreateEventScreen> {
-
   CategoryModel selectedCategory = CategoryModel.categories.first;
 
   TextEditingController titleController = TextEditingController();
@@ -25,7 +26,6 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
 
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
-
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,9 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                   labelPadding: EdgeInsets.only(right: 8),
                   tabAlignment: .start,
                   onTap: (index) {
-                    if (CategoryModel.categories[index].id == selectedCategory.id) return;
+                    if (CategoryModel.categories[index].id ==
+                        selectedCategory.id)
+                      return;
                     setState(() {
                       selectedCategory = CategoryModel.categories[index];
                     });
@@ -157,7 +159,13 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                               });
                             }
                           },
-                          child: Text( selectedDate == null ? 'Choose Date' : selectedDate!.toLocal().toString().split(' ')[0]),
+                          child: Text(
+                            selectedDate == null
+                                ? 'Choose Date'
+                                : selectedDate!.toLocal().toString().split(
+                                    ' ',
+                                  )[0],
+                          ),
                         ),
                       ],
                     ),
@@ -189,7 +197,11 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                               });
                             }
                           },
-                          child: Text(selectedTime == null ? 'Choose Time' : selectedTime!.format(context)),
+                          child: Text(
+                            selectedTime == null
+                                ? 'Choose Time'
+                                : selectedTime!.format(context),
+                          ),
                         ),
                       ],
                     ),
@@ -211,6 +223,24 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   }
 
   void createEvent() {
-    if (!formKey.currentState!.validate()) {}
+    if (formKey.currentState!.validate() &&
+        selectedDate != null &&
+        selectedTime != null) {
+      EventModel event = EventModel(
+        title: titleController.text,
+        description: descriptionController.text,
+        dateTime: DateTime(
+          selectedDate!.year,
+          selectedDate!.month,
+          selectedDate!.day,
+          selectedTime!.hour,
+          selectedTime!.minute,
+        ),
+        category: selectedCategory,
+      );
+      FirebaseServes.createEvent(event).then((_) {
+        Navigator.of(context).pop();
+      });
+    }
   }
 }
