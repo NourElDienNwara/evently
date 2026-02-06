@@ -1,4 +1,5 @@
 import 'package:evently/auth/login_screen.dart';
+import 'package:evently/firebase_serves.dart';
 import 'package:evently/home_screen.dart';
 import 'package:evently/widgets/default_elevated_botton.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
@@ -33,17 +34,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               crossAxisAlignment: .start,
               children: [
-                Center(child: Image.asset('assets/images/evently.png', height: 27)),
-            
+                Center(
+                  child: Image.asset('assets/images/evently.png', height: 27),
+                ),
+
                 SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-            
+
                 Text(
                   'Create your account',
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-            
+
                 SizedBox(height: 24),
-            
+
                 DefaultTextFormField(
                   hintText: 'Enter Your Name',
                   prefixIcon: 'user',
@@ -55,9 +58,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
-            
+
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-            
+
                 DefaultTextFormField(
                   hintText: 'Enter Your Email',
                   prefixIcon: 'email',
@@ -69,9 +72,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
-            
+
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-            
+
                 DefaultTextFormField(
                   hintText: 'Enter Your Password',
                   prefixIcon: 'password',
@@ -84,9 +87,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
-            
+
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-            
+
                 DefaultTextFormField(
                   hintText: 'Confirm Your Password',
                   prefixIcon: 'password',
@@ -102,20 +105,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return null;
                   },
                 ),
-            
+
                 SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-            
+
                 DefaultElevatedBotton(label: 'Register', onPressed: register),
-            
+
                 SizedBox(height: 24),
-            
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Already have an account?', style: Theme.of(context).textTheme.titleSmall),
+                    Text(
+                      'Already have an account?',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                        Navigator.of(
+                          context,
+                        ).pushReplacementNamed(LoginScreen.routeName);
                       },
                       child: Text(
                         'Login',
@@ -136,8 +144,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void register() {
-     if (formKey.currentState!.validate()) {
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+    if (formKey.currentState!.validate()) {
+      FirebaseServes.register(
+        userName: nameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+      ).then((user) {
+        Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+      });
     }
   }
 }
