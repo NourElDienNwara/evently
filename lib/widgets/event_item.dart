@@ -1,8 +1,12 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/models/event_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EventItem extends StatelessWidget {
-  const EventItem({super.key});
+  EventModel events;
+
+  EventItem(this.events);
 
   @override
   Widget build(BuildContext context) {
@@ -11,13 +15,13 @@ class EventItem extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Image.asset(
-            'assets/images/sport.png',
+            'assets/images/${events.category.imageName}.png',
             height: MediaQuery.of(context).size.height * 0.23,
             width: double.infinity,
             fit: BoxFit.fill,
           ),
         ),
-        
+
         Container(
           margin: EdgeInsets.all(8),
           padding: EdgeInsets.all(8),
@@ -26,7 +30,7 @@ class EventItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(
-            '21 Jan',
+            DateFormat('d MMM').format(events.dateTime),
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
               fontWeight: FontWeight.w600,
               color: Theme.of(context).primaryColor,
@@ -38,7 +42,7 @@ class EventItem extends StatelessWidget {
           width: MediaQuery.of(context).size.width - 32,
           bottom: 8,
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 8,),
+            margin: EdgeInsets.symmetric(horizontal: 8),
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: AppTheme.light.background,
@@ -48,15 +52,15 @@ class EventItem extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    'This is a Birthday Party',
+                    events.title,
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       fontWeight: FontWeight.w600,
                       color: AppTheme.light.mainText,
                     ),
                   ),
                 ),
-                
-                SizedBox(width: 8,),
+
+                SizedBox(width: 8),
                 Icon(Icons.favorite_outline),
               ],
             ),
