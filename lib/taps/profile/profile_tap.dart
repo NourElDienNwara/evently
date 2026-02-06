@@ -1,13 +1,21 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/auth/login_screen.dart';
+import 'package:evently/auth/register_screen.dart';
+import 'package:evently/firebase_serves.dart';
 import 'package:evently/models/language_option_mogel.dart';
+import 'package:evently/models/user_model.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class ProfileTap extends StatelessWidget {
   const ProfileTap({super.key});
 
   @override
   Widget build(BuildContext context) {
+    UserModel currentUser = Provider.of<UserProvider>(context).currentUser!;
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -20,7 +28,7 @@ class ProfileTap extends StatelessWidget {
           SizedBox(height: 16),
 
           Text(
-            'User Name',
+            currentUser.userName,
             style: Theme.of(
               context,
             ).textTheme.titleLarge!.copyWith(fontWeight: .w600),
@@ -29,7 +37,7 @@ class ProfileTap extends StatelessWidget {
           SizedBox(height: 4),
 
           Text(
-            'username@gmail.com',
+            currentUser.email,
             style: Theme.of(context).textTheme.titleSmall,
           ),
 
@@ -57,12 +65,16 @@ class ProfileTap extends StatelessWidget {
                   builder: (context) => AlertDialog(
                     title: Text("اختار اللغة"),
                     content: Text("من فضلك اختر لغة التطبيق"),
-                    actions: LanguageOptionMogel.options.map((language) => TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(language.name),
-                    )).toList(),
+                    actions: LanguageOptionMogel.options
+                        .map(
+                          (language) => TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(language.name),
+                          ),
+                        )
+                        .toList(),
                   ),
                 );
               },
@@ -80,6 +92,9 @@ class ProfileTap extends StatelessWidget {
 
           ListTile(
             title: Text('Log Out'),
+            onTap: () {
+              FirebaseServes.logout().then((_) => Navigator.of(context).pushReplacementNamed(LoginScreen.routeName).then((_) => Provider.of<UserProvider>(context).updateCurrentUser(null)));
+            },
             trailing: SvgPicture.asset(
               'assets/icons/logout.svg',
               width: 24,
@@ -92,5 +107,3 @@ class ProfileTap extends StatelessWidget {
     );
   }
 }
-
-
