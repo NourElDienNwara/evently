@@ -25,6 +25,7 @@ class FirebaseServes {
       id: userCredential.user!.uid,
       userName: userName,
       email: email,
+      favoriteEventIDs: [],
     );
 
     CollectionReference<UserModel> userCollection = getusersCollection();
@@ -71,5 +72,21 @@ class FirebaseServes {
 
     QuerySnapshot<EventModel> querySnapshot = await eventsCollection.get();
     return querySnapshot.docs.map((docSnapshot) => docSnapshot.data()).toList();
+  }
+
+  static Future<void> addEventToFavorite(String eventID) async {
+    CollectionReference<UserModel> userCollection = getusersCollection();
+    DocumentReference<UserModel> userDoc = userCollection.doc(
+      FirebaseAuth.instance.currentUser!.uid,
+    );
+    return userDoc.update({'favoriteEventIDs': FieldValue.arrayUnion([eventID])});
+  }
+
+  static Future<void> removeEventFromFavorite(String eventID) async {
+    CollectionReference<UserModel> userCollection = getusersCollection();
+    DocumentReference<UserModel> userDoc = userCollection.doc(
+      FirebaseAuth.instance.currentUser!.uid,
+    );
+    return userDoc.update({'favoriteEventIDs': FieldValue.arrayRemove([eventID])});
   }
 }

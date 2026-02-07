@@ -1,21 +1,27 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/firebase_serves.dart';
 import 'package:evently/models/event_model.dart';
+import 'package:evently/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class EventItem extends StatelessWidget {
-  EventModel events;
+  EventModel event;
 
-  EventItem(this.events);
+  EventItem(this.event);
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of<UserProvider>(context);
+    bool isFavorite = userProvider.checkIsFavoriteEvent(event.id);
+
     return Stack(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Image.asset(
-            'assets/images/${events.category.imageName}.png',
+            'assets/images/${event.category.imageName}.png',
             height: MediaQuery.of(context).size.height * 0.23,
             width: double.infinity,
             fit: BoxFit.fill,
@@ -30,7 +36,7 @@ class EventItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(
-            DateFormat('d MMM').format(events.dateTime),
+            DateFormat('d MMM').format(event.dateTime),
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
               fontWeight: FontWeight.w600,
               color: Theme.of(context).primaryColor,
@@ -52,7 +58,7 @@ class EventItem extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    events.title,
+                    event.title,
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       fontWeight: FontWeight.w600,
                       color: AppTheme.light.mainText,
@@ -61,7 +67,16 @@ class EventItem extends StatelessWidget {
                 ),
 
                 SizedBox(width: 8),
-                Icon(Icons.favorite_outline),
+                InkWell(
+                  onTap: () {
+                    if (isFavorite) {
+                      userProvider.addEventToFavorite(event.id);
+                    } else {
+                      userProvider.removeEventFromFavorite(event.id);
+                    }
+                  },
+                  child: Icon(isFavorite ? Icons.favorite : Icons.favorite_outline),
+                ),
               ],
             ),
           ),

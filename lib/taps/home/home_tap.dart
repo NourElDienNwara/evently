@@ -8,9 +8,14 @@ import 'package:evently/widgets/event_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeTap extends StatelessWidget {
+class HomeTap extends StatefulWidget {
   const HomeTap({super.key});
 
+  @override
+  State<HomeTap> createState() => _HomeTapState();
+}
+
+class _HomeTapState extends State<HomeTap> {
   @override
   Widget build(BuildContext context) {
     EventsProvider eventsProvider = Provider.of<EventsProvider>(context);
