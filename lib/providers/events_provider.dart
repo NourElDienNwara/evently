@@ -9,6 +9,7 @@ class EventsProvider with ChangeNotifier {
 
   Future<void> getEvents() async {
     allEvents = await FirebaseServes.getEvent();
+    desplayedEvents = allEvents;
     notifyListeners();
   }
 

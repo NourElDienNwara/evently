@@ -1,6 +1,7 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/firebase_serves.dart';
 import 'package:evently/models/event_model.dart';
+import 'package:evently/providers/settings_provider.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -14,6 +15,7 @@ class EventItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of<UserProvider>(context);
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     bool isFavorite = userProvider.checkIsFavoriteEvent(event.id);
 
     return Stack(
@@ -32,8 +34,9 @@ class EventItem extends StatelessWidget {
           margin: EdgeInsets.all(8),
           padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: AppTheme.light.background,
-            borderRadius: BorderRadius.circular(8),
+            color: settingsProvider.isDark ? AppTheme.dark.background : AppTheme.light.background,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: settingsProvider.isDark ? AppTheme.dark.stoke : AppTheme.light.stoke),
           ),
           child: Text(
             DateFormat('d MMM').format(event.dateTime),
@@ -51,8 +54,9 @@ class EventItem extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 8),
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppTheme.light.background,
+              color: settingsProvider.isDark ? AppTheme.dark.background : AppTheme.light.background,
               borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: settingsProvider.isDark ? AppTheme.dark.stoke : AppTheme.light.stoke),
             ),
             child: Row(
               children: [
@@ -61,7 +65,7 @@ class EventItem extends StatelessWidget {
                     event.title,
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: AppTheme.light.mainText,
+                      color: settingsProvider.isDark ? AppTheme.dark.mainText : AppTheme.light.mainText,
                     ),
                   ),
                 ),
@@ -75,7 +79,10 @@ class EventItem extends StatelessWidget {
                       userProvider.removeEventFromFavorite(event.id);
                     }
                   },
-                  child: Icon(isFavorite ? Icons.favorite : Icons.favorite_outline),
+                  child: Icon(
+                    isFavorite ? Icons.favorite : Icons.favorite_outline,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ],
             ),

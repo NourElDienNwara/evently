@@ -4,6 +4,7 @@ import 'package:evently/auth/register_screen.dart';
 import 'package:evently/firebase_serves.dart';
 import 'package:evently/models/language_option_mogel.dart';
 import 'package:evently/models/user_model.dart';
+import 'package:evently/providers/settings_provider.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,6 +16,7 @@ class ProfileTap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserModel currentUser = Provider.of<UserProvider>(context).currentUser!;
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
 
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -45,8 +47,10 @@ class ProfileTap extends StatelessWidget {
 
           SwitchListTile(
             title: Text('Dark Mode'),
-            value: false,
-            onChanged: (value) {},
+            value: settingsProvider.isDark,
+            onChanged: (isDark) {
+              settingsProvider.changeTheme(isDark ? .dark : .light);
+            },
 
             activeTrackColor: Theme.of(context).primaryColor,
             inactiveTrackColor: AppTheme.light.stoke,
@@ -93,7 +97,15 @@ class ProfileTap extends StatelessWidget {
           ListTile(
             title: Text('Log Out'),
             onTap: () {
-              FirebaseServes.logout().then((_) => Navigator.of(context).pushReplacementNamed(LoginScreen.routeName).then((_) => Provider.of<UserProvider>(context).updateCurrentUser(null)));
+              FirebaseServes.logout().then(
+                (_) => Navigator.of(context)
+                    .pushReplacementNamed(LoginScreen.routeName)
+                    .then(
+                      (_) => Provider.of<UserProvider>(
+                        context,
+                      ).updateCurrentUser(null),
+                    ),
+              );
             },
             trailing: SvgPicture.asset(
               'assets/icons/logout.svg',

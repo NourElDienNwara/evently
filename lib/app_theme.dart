@@ -75,7 +75,7 @@ class AppTheme {
       tileColor: light.inputs,
       minTileHeight: 0,
       contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16),), 
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       titleTextStyle: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w500,
@@ -99,13 +99,8 @@ class AppTheme {
       style: ElevatedButton.styleFrom(
         backgroundColor: light.mainColor,
         foregroundColor: light.inputs,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        textStyle: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
       ),
     ),
 
@@ -115,7 +110,7 @@ class AppTheme {
         textStyle: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,
-          decoration: .underline
+          decoration: .underline,
         ),
       ),
     ),
@@ -149,6 +144,58 @@ class AppTheme {
 
     scaffoldBackgroundColor: dark.background,
 
+    appBarTheme: AppBarTheme(
+      backgroundColor: dark.background,
+      centerTitle: true,
+      titleTextStyle: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        color: dark.mainText,
+      ),
+    ),
+
+    inputDecorationTheme: InputDecorationThemeData(
+      filled: true,
+      fillColor: dark.inputs,
+      hintStyle: TextStyle(
+        color: dark.secText,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+      ),
+
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: dark.stoke),
+        borderRadius: BorderRadius.circular(16),
+      ),
+
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: dark.stoke),
+        borderRadius: BorderRadius.circular(16),
+      ),
+
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: dark.red),
+        borderRadius: BorderRadius.circular(16),
+      ),
+
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: dark.red),
+        borderRadius: BorderRadius.circular(16),
+      ),
+    ),
+
+    listTileTheme: ListTileThemeData(
+      tileColor: dark.inputs,
+      minTileHeight: 0,
+      contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      titleTextStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: dark.mainText,
+      ),
+    ),
+
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: dark.inputs,
       selectedItemColor: dark.mainColor,
@@ -161,11 +208,31 @@ class AppTheme {
       shape: CircleBorder(),
     ),
 
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: dark.mainColor,
+        foregroundColor: dark.inputs,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+      ),
+    ),
+
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: dark.mainColor,
+        textStyle: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          decoration: .underline,
+        ),
+      ),
+    ),
+
     textTheme: TextTheme(
       headlineSmall: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.w600,
-        color: dark.mainColor,
+        color: dark.mainText,
       ),
       titleLarge: TextStyle(
         fontSize: 20,
@@ -180,7 +247,7 @@ class AppTheme {
       titleSmall: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: dark.secText,
+        color: dark.mainText,
       ),
     ),
   );
