@@ -1,4 +1,5 @@
 import 'package:evently/create_event_screen.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/taps/favorite/favorite_tap.dart';
 import 'package:evently/taps/home/home_tap.dart';
 import 'package:evently/taps/profile/profile_tap.dart';
@@ -16,22 +17,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
-  List<Widget> taps = [
-    HomeTap(),
-    FavoriteTap(),
-    ProfileTap(),
-  ];
+  List<Widget> taps = [HomeTap(), FavoriteTap(), ProfileTap()];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
 
+    return Scaffold(
       body: SafeArea(child: taps[currentIndex]),
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pushNamed(CreateEventScreen.routeName);
         },
-        child: Icon(Icons.add, size: 28,),
+        child: Icon(Icons.add, size: 28),
       ),
 
       bottomNavigationBar: BottomNavigationBar(
@@ -53,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 24,
               fit: BoxFit.scaleDown,
             ),
-            label: 'Home',
+            label: appLocalizations.home,
           ),
 
           BottomNavigationBarItem(
@@ -69,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 24,
               fit: BoxFit.scaleDown,
             ),
-            label: 'Favorite',
+            label: appLocalizations.favorite,
           ),
 
           BottomNavigationBarItem(
@@ -85,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 24,
               fit: BoxFit.scaleDown,
             ),
-            label: 'Profile',
+            label: appLocalizations.profile,
           ),
         ],
       ),

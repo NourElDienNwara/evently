@@ -1,0 +1,46 @@
+{
+  "auth_login_title": "تسجيل الدخول إلى حسابك",
+  "auth_register_title": "إنشاء حساب جديد",
+
+  "auth_name_hint": "ادخل اسمك",
+  "auth_email_hint": "ادخل بريدك الإلكتروني",
+  "auth_password_hint": "ادخل كلمة المرور",
+  "auth_confirmPassword_hint": "تأكيد كلمة المرور",
+
+  "auth_login_botton": "تسجيل الدخول",
+  "auth_register_botton": "إنشاء حساب",
+
+  "auth_login_AQ": "ليس لديك حساب؟",
+  "auth_register_AQ": "لديك حساب بالفعل؟",
+
+
+  "home": "الرئيسية",
+  "home_welcome": "مرحبًا بعودتك ✨",
+
+
+  "favorite": "المفضلة",
+  "favorite_search": "ابحث عن حدث",
+
+
+  "profile": "الملف الشخصي",
+  "profile_darkMode": "الوضع الليلي",
+  "profile_language": "اللغة",
+  "profile_logout": "تسجيل الخروج",
+
+  "profile_titleMessage": "اختر اللغة",
+  "profile_subTitleMessage": "من فضلك اختر لغة التطبيق",
+
+
+
+  "createEvent_pageName": "إضافة حدث",
+
+  "createEvent_title": "العنوان",
+  "createEvent_title_hint": "عنوان الحدث",
+  "createEvent_description": "الوصف",
+  "createEvent_description_hint": "وصف الحدث",
+  "createEvent_eventDate": "تاريخ الحدث",
+  "createEvent_eventTime": "وقت الحدث",
+  "createEvent_chooseDate": "اختر التاريخ",
+  "createEvent_chooseTime": "اختر الوقت",
+  "createEvent_botton": "إضافة الحدث"
+}

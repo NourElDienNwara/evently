@@ -1,6 +1,7 @@
 import 'package:evently/auth/login_screen.dart';
 import 'package:evently/firebase_serves.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:evently/widgets/default_elevated_botton.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
@@ -28,6 +29,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -45,14 +49,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.03),
 
                 Text(
-                  'Create your account',
+                  appLocalizations.auth_register_title,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
 
                 SizedBox(height: 24),
 
                 DefaultTextFormField(
-                  hintText: 'Enter Your Name',
+                  hintText: appLocalizations.auth_name_hint,
                   prefixIcon: 'user',
                   controller: nameController,
                   validator: (value) {
@@ -66,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
 
                 DefaultTextFormField(
-                  hintText: 'Enter Your Email',
+                  hintText: appLocalizations.auth_email_hint,
                   prefixIcon: 'email',
                   controller: emailController,
                   validator: (value) {
@@ -80,7 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
 
                 DefaultTextFormField(
-                  hintText: 'Enter Your Password',
+                  hintText: appLocalizations.auth_password_hint,
                   prefixIcon: 'password',
                   isPassword: true,
                   controller: passwordController,
@@ -95,7 +99,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
 
                 DefaultTextFormField(
-                  hintText: 'Confirm Your Password',
+                  hintText: appLocalizations.auth_confirmPassword_hint,
                   prefixIcon: 'password',
                   isPassword: true,
                   controller: confirmPasswordController,
@@ -112,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                 SizedBox(height: MediaQuery.of(context).size.height * 0.04),
 
-                DefaultElevatedBotton(label: 'Register', onPressed: register),
+                DefaultElevatedBotton(label: appLocalizations.auth_register_botton, onPressed: register),
 
                 SizedBox(height: 24),
 
@@ -120,7 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Already have an account?',
+                      appLocalizations.auth_register_AQ,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                     TextButton(
@@ -130,7 +134,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ).pushReplacementNamed(LoginScreen.routeName);
                       },
                       child: Text(
-                        'Login',
+                        appLocalizations.auth_login_botton,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.w600,
