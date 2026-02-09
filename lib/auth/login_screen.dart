@@ -1,6 +1,7 @@
 import 'package:evently/auth/register_screen.dart';
 import 'package:evently/firebase_serves.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/user_provider.dart';
 import 'package:evently/widgets/default_elevated_botton.dart';
 import 'package:evently/widgets/default_text_form_field.dart';
@@ -28,6 +29,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
+    
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -45,14 +49,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.03),
 
                 Text(
-                  'Login to your account',
+                  appLocalizations.auth_login_title,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
 
                 SizedBox(height: 24),
 
                 DefaultTextFormField(
-                  hintText: 'Enter Your Email',
+                  hintText: appLocalizations.auth_email_hint,
                   prefixIcon: 'email',
                   controller: emailController,
                   validator: (value) {
@@ -66,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
 
                 DefaultTextFormField(
-                  hintText: 'Enter Your Password',
+                  hintText: appLocalizations.auth_password_hint,
                   prefixIcon: 'password',
                   isPassword: true,
                   controller: passwordController,
@@ -82,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 SizedBox(height: MediaQuery.of(context).size.height * 0.04),
 
-                DefaultElevatedBotton(label: 'Login', onPressed: login),
+                DefaultElevatedBotton(label: appLocalizations.auth_login_botton, onPressed: login),
 
                 SizedBox(height: 24),
 
@@ -90,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Don’t have an account ?',
+                      appLocalizations.auth_login_AQ,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                     TextButton(
@@ -100,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ).pushReplacementNamed(RegisterScreen.routeName);
                       },
                       child: Text(
-                        'Register',
+                        appLocalizations.auth_register_botton,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.w600,

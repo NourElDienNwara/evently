@@ -1,4 +1,5 @@
 import 'package:evently/firebase_serves.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/category_model.dart';
 import 'package:evently/models/event_model.dart';
 import 'package:evently/taps/home/tap_item.dart';
@@ -30,6 +31,9 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -37,7 +41,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back_ios_new_outlined),
         ),
-        title: Text('Add Event'),
+        title: Text(appLocalizations.createEvent_pageName),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -96,12 +100,12 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                   crossAxisAlignment: .start,
                   children: [
                     Text(
-                      'Title',
+                      appLocalizations.createEvent_title,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     SizedBox(height: 8),
                     DefaultTextFormField(
-                      hintText: 'Event Title',
+                      hintText: appLocalizations.createEvent_title_hint,
                       controller: titleController,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -113,12 +117,12 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     SizedBox(height: 16),
 
                     Text(
-                      'Description',
+                      appLocalizations.createEvent_description,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     SizedBox(height: 8),
                     DefaultTextFormField(
-                      hintText: 'Event Description ...',
+                      hintText: appLocalizations.createEvent_description_hint,
                       maxLines: 5,
                       controller: descriptionController,
                       validator: (value) {
@@ -141,7 +145,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                         ),
                         SizedBox(width: 4),
                         Text(
-                          'Event Date',
+                          appLocalizations.createEvent_eventDate,
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                         Spacer(),
@@ -162,7 +166,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                           },
                           child: Text(
                             selectedDate == null
-                                ? 'Choose Date'
+                                ? appLocalizations.createEvent_chooseDate
                                 : selectedDate!.toLocal().toString().split(
                                     ' ',
                                   )[0],
@@ -181,7 +185,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                         ),
                         SizedBox(width: 4),
                         Text(
-                          'Event Time',
+                          appLocalizations.createEvent_eventTime,
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                         Spacer(),
@@ -200,7 +204,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                           },
                           child: Text(
                             selectedTime == null
-                                ? 'Choose Time'
+                                ? appLocalizations.createEvent_chooseTime
                                 : selectedTime!.format(context),
                           ),
                         ),
@@ -210,7 +214,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     SizedBox(height: 16),
 
                     DefaultElevatedBotton(
-                      label: 'Add Event',
+                      label: appLocalizations.createEvent_botton,
                       onPressed: createEvent,
                     ),
                   ],

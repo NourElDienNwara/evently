@@ -34,9 +34,15 @@ class EventItem extends StatelessWidget {
           margin: EdgeInsets.all(8),
           padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: settingsProvider.isDark ? AppTheme.dark.background : AppTheme.light.background,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: settingsProvider.isDark ? AppTheme.dark.stoke : AppTheme.light.stoke),
+            color: settingsProvider.isDark
+                ? AppTheme.dark.background
+                : AppTheme.light.background,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: settingsProvider.isDark
+                  ? AppTheme.dark.stoke
+                  : AppTheme.light.stoke,
+            ),
           ),
           child: Text(
             DateFormat('d MMM').format(event.dateTime),
@@ -54,9 +60,15 @@ class EventItem extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 8),
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: settingsProvider.isDark ? AppTheme.dark.background : AppTheme.light.background,
+              color: settingsProvider.isDark
+                  ? AppTheme.dark.background
+                  : AppTheme.light.background,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: settingsProvider.isDark ? AppTheme.dark.stoke : AppTheme.light.stoke),
+              border: Border.all(
+                color: settingsProvider.isDark
+                    ? AppTheme.dark.stoke
+                    : AppTheme.light.stoke,
+              ),
             ),
             child: Row(
               children: [
@@ -65,7 +77,9 @@ class EventItem extends StatelessWidget {
                     event.title,
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: settingsProvider.isDark ? AppTheme.dark.mainText : AppTheme.light.mainText,
+                      color: settingsProvider.isDark
+                          ? AppTheme.dark.mainText
+                          : AppTheme.light.mainText,
                     ),
                   ),
                 ),
@@ -74,9 +88,9 @@ class EventItem extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     if (isFavorite) {
-                      userProvider.addEventToFavorite(event.id);
-                    } else {
                       userProvider.removeEventFromFavorite(event.id);
+                    } else {
+                      userProvider.addEventToFavorite(event.id);
                     }
                   },
                   child: Icon(

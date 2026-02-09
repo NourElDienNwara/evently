@@ -2,6 +2,7 @@ import 'package:evently/app_theme.dart';
 import 'package:evently/auth/login_screen.dart';
 import 'package:evently/auth/register_screen.dart';
 import 'package:evently/firebase_serves.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/language_option_mogel.dart';
 import 'package:evently/models/user_model.dart';
 import 'package:evently/providers/settings_provider.dart';
@@ -15,6 +16,8 @@ class ProfileTap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
+
     UserModel currentUser = Provider.of<UserProvider>(context).currentUser!;
     SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
 
@@ -46,7 +49,7 @@ class ProfileTap extends StatelessWidget {
           SizedBox(height: 32),
 
           SwitchListTile(
-            title: Text('Dark Mode'),
+            title: Text(appLocalizations.profile_darkMode),
             value: settingsProvider.isDark,
             onChanged: (isDark) {
               settingsProvider.changeTheme(isDark ? .dark : .light);
@@ -61,41 +64,51 @@ class ProfileTap extends StatelessWidget {
           SizedBox(height: 16),
 
           ListTile(
-            title: Text('Language'),
-            trailing: IconButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: Text("اختار اللغة"),
-                    content: Text("من فضلك اختر لغة التطبيق"),
-                    actions: LanguageOptionMogel.options
-                        .map(
-                          (language) => TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text(language.name),
-                          ),
-                        )
-                        .toList(),
+            title: Text(appLocalizations.profile_language),
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text(
+                    appLocalizations.profile_titleMessage,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
-                );
-              },
-
-              icon: SvgPicture.asset(
-                'assets/icons/arrow-right.svg',
-                width: 24,
-                height: 24,
-                fit: BoxFit.fill,
-              ),
+                  content: Text(
+                    appLocalizations.profile_subTitleMessage,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  backgroundColor: settingsProvider.isDark
+                      ? AppTheme.dark.background
+                      : AppTheme.light.background,
+                  actions: LanguageOptionMogel.options
+                      .map(
+                        (language) => TextButton(
+                          onPressed: () {
+                            settingsProvider.changeLanguage(language.code);
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            language.name,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              );
+            },
+            trailing: SvgPicture.asset(
+              'assets/icons/arrow-right.svg',
+              width: 24,
+              height: 24,
+              fit: BoxFit.fill,
             ),
           ),
 
           SizedBox(height: 16),
 
           ListTile(
-            title: Text('Log Out'),
+            title: Text(appLocalizations.profile_logout),
             onTap: () {
               FirebaseServes.logout().then(
                 (_) => Navigator.of(context)

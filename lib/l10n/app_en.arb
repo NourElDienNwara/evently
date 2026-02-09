@@ -1,0 +1,48 @@
+{
+
+    "auth_login_title": "Login to your accont",
+    "auth_register_title": "Create your account",
+
+    "auth_name_hint": "Enter Your Name",
+    "auth_email_hint": "Enter Your Email",
+    "auth_password_hint": "Enter Your Password",
+    "auth_confirmPassword_hint": "Confirm Your Password",
+
+    "auth_login_botton": "Login",
+    "auth_register_botton": "Register", 
+
+    "auth_login_AQ": "Don't have an account?",
+    "auth_register_AQ": "Already have an account?",
+
+
+
+    "home": "Home",
+    "home_welcome": "Welcome Back ✨",
+    
+
+    "favorite": "Favorite",
+    "favorite_search": "Search for event",
+
+
+    "profile": "Profile",
+    "profile_darkMode": "Dark Mode",
+    "profile_language": "Language",
+    "profile_logout": "Log Out",
+
+    "profile_titleMessage": "Choose Language",
+    "profile_subTitleMessage": "Please Choose Language App",
+
+
+
+    "createEvent_pageName": "Add Event",
+
+    "createEvent_title": "Title",
+    "createEvent_title_hint": "Event Title",
+    "createEvent_description": "Description",
+    "createEvent_description_hint": "Event Description",
+    "createEvent_eventDate": "Event Date",
+    "createEvent_eventTime": "Event Time",
+    "createEvent_chooseDate": "Choose Date",
+    "createEvent_chooseTime": "Choose Time",
+    "createEvent_botton": "Add Event"
+}
